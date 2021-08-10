@@ -4,7 +4,6 @@ import io.javalin.Javalin;
 import io.javalin.plugin.openapi.OpenApiOptions;
 import io.javalin.plugin.openapi.OpenApiPlugin;
 import io.javalin.plugin.openapi.ui.SwaggerOptions;
-import io.servertap.api.v1.EconomyApi;
 import io.servertap.api.v1.PlayerApi;
 import io.servertap.api.v1.ServerApi;
 import io.swagger.v3.oas.models.info.Info;
@@ -13,7 +12,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bstats.bukkit.Metrics;
 
 import java.util.logging.Logger;
 import java.util.Arrays;
@@ -29,9 +27,6 @@ public class PluginEntrypoint extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Tell bStats what plugin this is
-        Metrics metrics = new Metrics(this, 9492);
-
         saveDefaultConfig();
         FileConfiguration bukkitConfig = getConfig();
         setupEconomy();
@@ -81,27 +76,9 @@ public class PluginEntrypoint extends JavaPlugin {
 
                 // Server routes
                 get("server", ServerApi::serverGet);
-                get("server/ops", ServerApi::getOps);
-                post("server/ops", ServerApi::opPlayer);
-                delete("server/ops", ServerApi::deopPlayer);
-                get("server/whitelist", ServerApi::whitelistGet);
-                post("server/whitelist", ServerApi::whitelistPost);
-                get("worlds", ServerApi::worldsGet);
-                post("worlds/save", ServerApi::saveAllWorlds);
-                get("worlds/:uuid", ServerApi::worldGet);
-                post("worlds/:uuid/save", ServerApi::saveWorld);
-                get("scoreboard", ServerApi::scoreboardGet);
-                get("scoreboard/:name", ServerApi::objectiveGet);
-
-                // Chat
-                post("chat/broadcast", ServerApi::broadcastPost);
-                post("chat/tell", ServerApi::tellPost);
 
                 // Player routes
                 get("players", PlayerApi::playersGet);
-                get("players/all", PlayerApi::offlinePlayersGet);
-                get("players/:uuid", PlayerApi::playerGet);
-                get("players/:playerUuid/:worldUuid/inventory", PlayerApi::getPlayerInv);
 
                 // Economy routes
                 post("economy/pay", EconomyApi::playerPay);

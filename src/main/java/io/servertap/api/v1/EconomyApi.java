@@ -1,6 +1,5 @@
 package io.servertap.api.v1;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import io.javalin.plugin.openapi.annotations.*;

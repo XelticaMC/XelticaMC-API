@@ -13,7 +13,6 @@ import io.servertap.PluginEntrypoint;
 import io.servertap.api.v1.models.*;
 import io.servertap.mojang.api.MojangApiService;
 import io.servertap.mojang.api.models.NameChange;
-import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
@@ -65,38 +64,9 @@ public class ServerApi {
         server.setMotd(bukkitServer.getMotd());
         server.setVersion(bukkitServer.getVersion());
         server.setBukkitVersion(bukkitServer.getBukkitVersion());
-        server.setWhitelistedPlayers(getWhitelist());
 
         // Possibly add 5m and 15m in the future?
         server.setTps(Lag.getTPSString());
-
-        // Get the list of IP bans
-        Set<ServerBan> bannedIps = new HashSet<>();
-        bukkitServer.getBanList(BanList.Type.IP).getBanEntries().forEach(banEntry -> {
-            ServerBan ban = new ServerBan();
-
-            ban.setSource(banEntry.getSource());
-            ban.setExpiration(banEntry.getExpiration());
-            ban.setReason(ban.getReason());
-            ban.setTarget(banEntry.getTarget());
-
-            bannedIps.add(ban);
-        });
-        server.setBannedIps(bannedIps);
-
-        // Get the list of player bans
-        Set<ServerBan> bannedPlayers = new HashSet<>();
-        bukkitServer.getBanList(BanList.Type.NAME).getBanEntries().forEach(banEntry -> {
-            ServerBan ban = new ServerBan();
-
-            ban.setSource(banEntry.getSource());
-            ban.setExpiration(banEntry.getExpiration());
-            ban.setReason(ban.getReason());
-            ban.setTarget(banEntry.getTarget());
-
-            bannedPlayers.add(ban);
-        });
-        server.setBannedPlayers(bannedPlayers);
 
         ServerHealth health = new ServerHealth();
 

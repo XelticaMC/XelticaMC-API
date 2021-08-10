@@ -2,9 +2,7 @@ package io.servertap.mojang.api;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.servertap.Constants;
 import io.servertap.mojang.api.models.NameChange;
-import io.servertap.mojang.api.models.NameHistory;
 import io.servertap.mojang.api.models.PlayerInfo;
 
 import java.io.BufferedReader;
@@ -16,8 +14,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MojangApiService {
@@ -72,10 +68,6 @@ public class MojangApiService {
 		} catch (MalformedURLException ignored) {
 			throw new IllegalArgumentException("The given resource string is not a valid URL.");
 		}
-	}
-
-	private static <T> ApiResponse getApiResponse(String resource, T requestData) {
-		throw new UnsupportedOperationException("Not implemented yet.");
 	}
 
 	private static class ApiResponse {

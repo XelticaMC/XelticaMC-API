@@ -215,22 +215,8 @@ public class WebhookEventListener implements Listener {
 	private Player fromBukkitPlayer(org.bukkit.entity.Player player) {
 		Player p = new Player();
 
-		if (PluginEntrypoint.getEconomy() != null) {
-			p.setBalance(PluginEntrypoint.getEconomy().getBalance(player));
-		}
-
 		p.setUuid(player.getUniqueId().toString());
 		p.setDisplayName(player.getDisplayName());
-
-		p.setAddress(player.getAddress().getHostName());
-		p.setPort(player.getAddress().getPort());
-
-		p.setExhaustion(player.getExhaustion());
-		p.setExp(player.getExp());
-
-		p.setWhitelisted(player.isWhitelisted());
-		p.setBanned(player.isBanned());
-		p.setOp(player.isOp());
 
 		return p;
 	}

@@ -2,8 +2,6 @@ package io.servertap.api.v1.models;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.Set;
-
 /**
  * A Bukkit/Spigot/Paper server
  */
@@ -25,15 +23,6 @@ public class Server {
 
     @Expose
     private ServerHealth health = null;
-
-    @Expose
-    private Set<ServerBan> bannedIps = null;
-
-    @Expose
-    private Set<ServerBan> bannedPlayers = null;
-
-    @Expose
-    private Set<Whitelist> whitelistedPlayers = null;
 
     public Server name(String name) {
         this.name = name;
@@ -91,29 +80,5 @@ public class Server {
 
     public void setBukkitVersion(String bukkitVersion) {
         this.bukkitVersion = bukkitVersion;
-    }
-
-    public Set<ServerBan> getBannedIps() {
-        return bannedIps;
-    }
-
-    public void setBannedIps(Set<ServerBan> bannedIps) {
-        this.bannedIps = bannedIps;
-    }
-
-    public Set<ServerBan> getBannedPlayers() {
-        return bannedPlayers;
-    }
-
-    public void setBannedPlayers(Set<ServerBan> bannedPlayers) {
-        this.bannedPlayers = bannedPlayers;
-    }
-
-    public Set<Whitelist> getWhitelistedPlayers() {
-        return whitelistedPlayers;
-    }
-
-    public void setWhitelistedPlayers(Set<Whitelist> whitelistPlayers) {
-        this.whitelistedPlayers = whitelistPlayers;
     }
 }
