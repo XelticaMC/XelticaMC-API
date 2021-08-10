@@ -6,6 +6,7 @@ import io.javalin.plugin.openapi.OpenApiPlugin;
 import io.javalin.plugin.openapi.ui.SwaggerOptions;
 import io.servertap.api.v1.PlayerApi;
 import io.servertap.api.v1.ServerApi;
+import io.servertap.api.v1.XCoreApi;
 import io.swagger.v3.oas.models.info.Info;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -80,10 +81,9 @@ public class PluginEntrypoint extends JavaPlugin {
                 // Player routes
                 get("players", PlayerApi::playersGet);
 
-                // Economy routes
-                post("economy/pay", EconomyApi::playerPay);
-                post("economy/debit", EconomyApi::playerDebit);
-                get("economy", EconomyApi::getEconomyPluginInformation);
+                // XCore routes
+                get("ranking", XCoreApi::rankingsGet);
+                get("ranking/:name", XCoreApi::rankingGet);
 
                 // Plugin routes
                 get("plugins", ServerApi::listPlugins);
